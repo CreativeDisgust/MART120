@@ -1,0 +1,13 @@
+The distinction between GUI and CLI
+Anthony Aubert
+
+GUI and CLI interfaces make up the two primary ways for a computer to show information.
+A GUI or graphical user interface is what we’re most used to these days. A GUI is any
+interface that you interact with that has graphics. This could be your computer's operating
+system when you're looking at the desktop. This could also be your phone or a video game.
+
+Next to that we have the CLI interface or the command line interface. This is entirely text
+interface with no option for graphics outside of “ASCII” art that is made up of text
+characters. This interface is not often used these days in the consumer market outside of
+rarely opening a Linux terminal or a windows command prompt. It still has a lot of use in
+commercial, educational and technical products
