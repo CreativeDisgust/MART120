@@ -1,0 +1,75 @@
+onEvent("BG", "mousemove", function() {
+  //player movement
+  //setProperty("player", "x", move.x - getProperty("player", "width") / 2);
+  //old code
+  //setProperty("player", "y", move.y  - getProperty("player", "height") / 2);
+});
+//variables 
+var score = 0;
+var enemyspeed = 1;
+var enemymove = 30;
+var bulletshot = false;
+var basespeed = 2;
+var hitbox = 5;
+var gameover = false;
+function reset() {
+  score = 0;
+  basespeed = 2;
+  enemyspeed = basespeed;
+  gameover = false;
+  bulletshot = false;
+  hideElement("gameover");
+  hideElement("resetb");
+  setText("l-score", "score:0");
+  setPosition("enemy", 160, 20);
+}
+onEvent("resetb", "click", function( ) {
+  reset();
+});
+//bullet control
+hideElement("gameover");
+onEvent("player", "click", function() {
+  if (bulletshot == false) {
+setPosition("bullet1", getProperty("player", "x") + (getProperty("player", "width") / 2) - 10, getProperty("player", "y"));
+  showElement("bullet1");
+  bulletshot = true;
+  }
+});
+timedLoop(16, function() {
+  if (gameover == false) {
+    setProperty("enemy", "x", getProperty("enemy", "x") + enemyspeed);
+    //enemy pathing
+    if (getProperty("enemy", "x") > 280 || getProperty("enemy", "x") < 1) {
+      enemyspeed = enemyspeed * -1;
+  if (enemyspeed > 0) {
+        enemyspeed = enemyspeed + 0.4;
+      } else {
+        enemyspeed = enemyspeed - 0.4;
+      }
+      setProperty("enemy", "y", getProperty("enemy", "y") + enemymove);
+    }
+    //bullet firing
+    if (bulletshot == true) {
+      setProperty("bullet1", "y", getProperty("bullet1", "y") - 5);
+      if (getProperty("bullet1", "y") < -50) {
+          hideElement("bullet1");
+          bulletshot = false;
+      }
+      if (getProperty("bullet1", "x") < getProperty("enemy", "x") + 50 - hitbox && getProperty("bullet1", "x") + 20 > getProperty("enemy", "x") + hitbox && getProperty("bullet1", "y") < getProperty("enemy", "y") + 50 - hitbox && getProperty("bullet1", "y") + 20 > getProperty("enemy", "y") + hitbox) {
+        score = score + 1;
+        setText("l-score", "Score: " + score);
+        hideElement("bullet1");
+        bulletshot = false;
+        setPosition("enemy", 160, 20); 
+        basespeed = basespeed + 0.5; 
+        enemyspeed = basespeed;
+      }
+    }
+    if (getProperty("player", "x") < getProperty("enemy", "x") + 50 - hitbox && getProperty("player", "x") + 50 > getProperty("enemy", "x") + hitbox && getProperty("player", "y") < getProperty("enemy", "y") + 50 - hitbox && getProperty("player", "y") + 50 > getProperty("enemy", "y") + hitbox) {
+      gameover = true;
+      showElement("gameover");
+      setText("gameover", "Final score:" + score);
+      showElement("resetb");
+    }
+  }
+});
