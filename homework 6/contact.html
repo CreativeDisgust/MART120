@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ibitsu:contact</title>
+</head>
+<body>
+	<nav>
+		<a href="index.html">Home</a>
+		<a href="aboutme.html">About me</a>
+		<a href="contact.html">contact</a>
+	</nav>
+
+<div>
+<h1>Contact me!</h1>
+	<form action="">
+		<p>first and last name: <input type="text" id="fName"></p>
+		<p>Email: <input type="text" id="lName"></p>
+		<input type="checkbox" id="termschk">
+		<label for="termschk"> I agree to submit my name and email to Ibitsu.online and the terms agreement</label>
+		<button id="submitbttn" disabled>Submit</button>
+	</form>
+	<script>
+		const termchk = document.getElementById('termschk');
+		const submitbttn = document.getElementById('submitbttn');
+		termschk.addEventListener('click', function() {
+			if (termschk.checked){
+				submitbttn.disabled = false;
+			} else {
+				submitbttn.disabled = true;
+			}
+		});
+		</script>
+</div>
+</body>
+</html>
